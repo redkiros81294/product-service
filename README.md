@@ -1,6 +1,6 @@
 # product-service
 ![CI](https://github.com/<redkiros81294>/product-service/actions/workflows/ci.yml/badge.svg)
-![CI](https://github.com/<ZaynSol>/product-service/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/<yeabsamuelz25>/product-service/actions/workflows/ci.yml/badge.svg)
 
 A RESTful product microservice built with Spring Boot 3.
 ## Getting Started
@@ -108,24 +108,6 @@ Invalid requests will return appropriate HTTP status codes with error details:
 - 404 Not Found - Product not found
 - 500 Internal Server Error - Server errors
 
-## Project Structure
-
-src/
-├── main/
-│   ├── java/com/ctbe/yaredyeabsira/productservice/
-│   │   ├── ProductServiceApplication.java  # Main application class
-│   │   ├── controller/                     # REST controllers
-│   │   │   ├── ProductController.java
-│   │   │   └── HealthController.java
-│   │   ├── model/                          # Data models
-│   │   │   └── Product.java
-│   │   ├── repository/                     # Data access layer
-│   │   │   └── ProductRepository.java
-│   │   └── service/                        # Business logic
-│   │       └── ProductService.java
-│   └── resources/
-│       └── application.properties          # Application configuration
-└── test/                                   # Unit tests
 
 ## Testing
 
