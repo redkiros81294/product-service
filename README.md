@@ -1,6 +1,6 @@
 # product-service
 ![CI](https://github.com/<redkiros81294>/product-service/actions/workflows/ci.yml/badge.svg)
-![CI](https://github.com/<yeabsamuelz25>/product-service/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/<yeab-samuel>/product-service/actions/workflows/ci.yml/badge.svg)
 
 A RESTful product microservice built with Spring Boot 3.
 ## Getting Started
