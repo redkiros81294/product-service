@@ -1,133 +1,88 @@
 # Product Service
 
+![CI](https://github.com/redkiros81294/product-service/actions/workflows/ci.yml/badge.svg)
+
 A RESTful product microservice built with Spring Boot 3.
+
+## Swagger UI
+
+Access the API documentation at: `http://localhost:8080/swagger-ui.html`
+
+## API Endpoints
+
+| Method | Endpoint                | Description           | Status Code |
+|--------|-------------------------|-----------------------|-------------|
+| GET    | /api/v1/products       | List all products     | 200 OK      |
+| GET    | /api/v1/products/{id}   | Get product by ID     | 200 / 404   |
+| POST   | /api/v1/products       | Create new product    | 201 Created |
+| PUT    | /api/v1/products/{id}  | Update product        | 200 / 404   |
+| DELETE | /api/v1/products/{id}  | Delete product        | 204 / 404   |
+| GET    | /health                | Service health check  | 200 OK      |
 
 ## Getting Started
 
 ```bash
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
-## Endpoints
+The application will start on port 8080.
 
-| Method | Endpoint      | Description           |
-|--------|---------------|-----------------------|
-| GET    | /products     | List all products     |
-| GET    | /products/{id}| Get product by ID    |
-| POST   | /products     | Create a new product  |
-| GET    | /health       | Service health check |
-
-## Setup Instructions
-
-### Prerequisites
+## Prerequisites
 
 - Java: JDK 17 or higher
 - Maven: Apache Maven 3.8+
 
-### Building the Application
-
-To build the application, run the following command in the project root directory:
+## Building
 
 ```bash
 ./mvnw clean package
 ```
 
-Or on Windows:
+## Testing
 
 ```bash
-mvnw.cmd clean package
+./mvnw test
 ```
 
-### Running the Application
+## API Examples
 
-After building, run the application using:
-
-```bash
-./mvnw spring-boot:run
-```
-
-Or on Windows:
-
-```bash
-mvnw.cmd spring-boot:run
-```
-
-The application will start on port 8080.
-
-### Running with Maven Wrapper (No Maven Installed)
-
-If you don't have Maven installed, you can use the Maven wrapper included in the project:
-
-```bash
-./mvnw clean package -DskipTests
-./mvnw spring-boot:run
-```
-
-## Request/Response Examples
-
-#### GET /products
+### GET /api/v1/products
 
 Response:
 ```json
 [
   {
     "id": 1,
-    "name": "Sample Product",
-    "price": 29.99
+    "name": "Laptop",
+    "price": 999.99,
+    "stockQty": 10,
+    "category": "Electronics"
   }
 ]
 ```
 
-#### GET /products/{id}
-
-Response:
-```json
-{
-  "id": 1,
-  "name": "Sample Product",
-  "price": 29.99
-}
-```
-
-#### POST /products
+### POST /api/v1/products
 
 Request:
 ```json
 {
   "name": "New Product",
-  "price": 49.99
+  "price": 29.99,
+  "stockQty": 100,
+  "category": "Electronics"
 }
 ```
 
-Response:
-```json
-{
-  "id": 2,
-  "name": "New Product",
-  "price": 49.99
-}
-```
+Response: `201 Created` with Location header
 
-### Validation Rules
+### Validation Errors
 
-- `name`: Must not be blank
-- `price`: Must be a positive value
+- Blank name → `400 Bad Request` with ProblemDetail
+- Negative price → `400 Bad Request`
 
-### Error Responses
+### Not Found Errors
 
-Invalid requests will return appropriate HTTP status codes with error details:
-
-- `400 Bad Request` - Validation errors
-- `404 Not Found` - Product not found
-- `500 Internal Server Error` - Server errors
-
-## Testing
-
-Run the tests using:
-
-```bash
-./mvnw test
-```
+- Unknown ID → `404 Not Found` with ProblemDetail
 
 ## License
 
