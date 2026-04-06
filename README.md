@@ -84,6 +84,4 @@ Response: `201 Created` with Location header
 
 - Unknown ID → `404 Not Found` with ProblemDetail
 
-## License
 
-This project is for demonstration purposes.
