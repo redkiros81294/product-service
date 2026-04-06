@@ -1,22 +1,14 @@
-package com.ctbe.yared.productservice.model;
+package com.ctbe.yared.productservice.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-@Entity
-@Table(name = "products")
-public class Product {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ProductRequest {
 
     @NotBlank(message = "Name is required")
-    @Column(nullable = false)
     private String name;
 
     @DecimalMin(value = "0.01", message = "Price must be greater than 0")
-    @Column(nullable = false)
     private double price;
 
     @Min(value = 0, message = "Stock quantity cannot be negative")
@@ -25,18 +17,7 @@ public class Product {
     @NotBlank(message = "Category is required")
     private String category;
 
-    public Product() {}
-
-    public Product(String name, double price, int stockQty, String category) {
-        this.name = name;
-        this.price = price;
-        this.stockQty = stockQty;
-        this.category = category;
-    }
-
-    // Getters and setters (all fields)
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // getters & setters for all fields
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public double getPrice() { return price; }

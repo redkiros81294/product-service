@@ -1,36 +1,59 @@
 package com.ctbe.yared.productservice.controller;
 
-import com.ctbe.yared.productservice.model.Product;
+import com.ctbe.yared.productservice.dto.ProductRequest;
+import com.ctbe.yared.productservice.dto.ProductResponse;
 import com.ctbe.yared.productservice.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import java.net.URI;
 import java.util.List;
+
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/v1/products")
+@Tag(name = "Products", description = "Product catalogue CRUD operations")
 public class ProductController {
-    private final ProductService productService;
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+
+    private final ProductService service;
+
+    public ProductController(ProductService service) {
+        this.service = service;
     }
-// ── GET /products ────────────────────────────────────────
+
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        return ResponseEntity.ok(productService.findAll());
+    @Operation(summary = "List all products")
+    public ResponseEntity<List<ProductResponse>> getAll() {
+        return ResponseEntity.ok(service.findAll());
     }
-    // ── GET /products/{id} ───────────────────────────────────
+
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        return productService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @Operation(summary = "Get a product by ID")
+    public ResponseEntity<ProductResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
-    // ── POST /products ───────────────────────────────────────
+
     @PostMapping
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product
-                                                         product) {
-        Product saved = productService.save(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    @Operation(summary = "Create a new product")
+    public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductRequest request) {
+        ProductResponse created = service.create(request);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(created.getId()).toUri();
+        return ResponseEntity.created(location).body(created);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update an existing product")
+    public ResponseEntity<ProductResponse> update(@PathVariable Long id, @Valid @RequestBody ProductRequest request) {
+        return ResponseEntity.ok(service.update(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a product")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

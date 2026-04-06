@@ -1,0 +1,142 @@
+{
+  "info": {
+    "name": "product-service-lab2",
+    "description": "Product Service API - Lab 2\n\nMinimum Required Requests:\n- GET /api/v1/products - List all products (200 OK)\n- GET /api/v1/products/1 - Get by valid ID (200 OK)\n- GET /api/v1/products/9999 - Get by invalid ID (404 Not Found)\n- POST /api/v1/products - Create valid product (201 Created)\n- POST /api/v1/products - Create with blank name (400 Bad Request)\n- PUT /api/v1/products/1 - Update product (200 OK)\n- DELETE /api/v1/products/1 - Delete existing product (204 No Content)\n- DELETE /api/v1/products/9999 - Delete non-existent product (404 Not Found)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "GET - List all products",
+      "request": {
+        "name": "GET - List all products",
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products"]
+        }
+      }
+    },
+    {
+      "name": "GET - Get by valid ID",
+      "request": {
+        "name": "GET - Get by valid ID",
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products", "1"]
+        }
+      }
+    },
+    {
+      "name": "GET - Get by invalid ID",
+      "request": {
+        "name": "GET - Get by invalid ID",
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/9999",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products", "9999"]
+        }
+      }
+    },
+    {
+      "name": "POST - Create valid product",
+      "request": {
+        "name": "POST - Create valid product",
+        "method": "POST",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"New Product\",\n  \"price\": 29.99,\n  \"stockQty\": 100,\n  \"category\": \"Electronics\"\n}"
+        }
+      }
+    },
+    {
+      "name": "POST - Create with blank name (validation)",
+      "request": {
+        "name": "POST - Create with blank name",
+        "method": "POST",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"price\": 10.0,\n  \"stockQty\": 1,\n  \"category\": \"Tech\"\n}"
+        }
+      }
+    },
+    {
+      "name": "PUT - Update product",
+      "request": {
+        "name": "PUT - Update product",
+        "method": "PUT",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products", "1"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated Product\",\n  \"price\": 39.99,\n  \"stockQty\": 50,\n  \"category\": \"Electronics\"\n}"
+        }
+      }
+    },
+    {
+      "name": "DELETE - Delete existing product",
+      "request": {
+        "name": "DELETE - Delete existing product",
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products", "1"]
+        }
+      }
+    },
+    {
+      "name": "DELETE - Delete non-existent product",
+      "request": {
+        "name": "DELETE - Delete non-existent product",
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/9999",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products", "9999"]
+        }
+      }
+    }
+  ]
+}
