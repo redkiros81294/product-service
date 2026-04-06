@@ -1,7 +1,7 @@
-package com.ctbe.yaredyeabsira.productservice;
+package com.ctbe.yared.productservice;
 
-import com.ctbe.yaredyeabsira.productservice.model.Product;
-import com.ctbe.yaredyeabsira.productservice.repository.ProductRepository;
+import com.ctbe.yared.productservice.model.Product;
+import com.ctbe.yared.productservice.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

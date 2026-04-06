@@ -1,7 +1,7 @@
-package com.ctbe.yaredyeabsira.productservice.controller;
+package com.ctbe.yared.productservice.controller;
 
-import com.ctbe.yaredyeabsira.productservice.model.Product;
-import com.ctbe.yaredyeabsira.productservice.service.ProductService;
+import com.ctbe.yared.productservice.model.Product;
+import com.ctbe.yared.productservice.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

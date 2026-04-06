@@ -1,4 +1,4 @@
-package com.ctbe.yaredyeabsira.productservice.controller;
+package com.ctbe.yared.productservice.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

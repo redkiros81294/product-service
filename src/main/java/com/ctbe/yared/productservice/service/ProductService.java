@@ -1,7 +1,7 @@
-package com.ctbe.yaredyeabsira.productservice.service;
+package com.ctbe.yared.productservice.service;
 
-import com.ctbe.yaredyeabsira.productservice.model.Product;
-import com.ctbe.yaredyeabsira.productservice.repository.ProductRepository;
+import com.ctbe.yared.productservice.model.Product;
+import com.ctbe.yared.productservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;

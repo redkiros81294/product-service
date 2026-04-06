@@ -1,6 +1,6 @@
-package com.ctbe.yaredyeabsira.productservice.repository;
+package com.ctbe.yared.productservice.repository;
 
-import com.ctbe.yaredyeabsira.productservice.model.Product;
+import com.ctbe.yared.productservice.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

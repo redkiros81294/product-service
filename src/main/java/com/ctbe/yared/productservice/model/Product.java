@@ -1,4 +1,4 @@
-package com.ctbe.yaredyeabsira.productservice.model;
+package com.ctbe.yared.productservice.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
