@@ -1,7 +1,5 @@
 package com.ctbe.yared.productservice;
 
-import com.ctbe.yared.productservice.model.Product;
-import com.ctbe.yared.productservice.repository.ProductRepository;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 @OpenAPIDefinition(info = @Info(
     title = "Product Service API",
     version = "1.0.0",
-    description = "RESTful Product Catalogue - Lab 2"
+    description = "RESTful Product Catalogue - Lab 3 (PostgreSQL + Flyway + JPA Relationships)"
 ))
 public class ProductServiceApplication {
 
@@ -21,13 +19,7 @@ public class ProductServiceApplication {
         SpringApplication.run(ProductServiceApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner seedData(ProductRepository repo) {
-        return args -> {
-            repo.save(new Product("Laptop", 1200.00, 10, "Electronics"));
-            repo.save(new Product("Monitor", 350.00, 5, "Electronics"));
-            repo.save(new Product("Keyboard", 85.00, 20, "Electronics"));
-        };
-    }
+    // Seed data is now handled by Flyway migrations (V5__seed_categories.sql) + API calls.
+    // The old in-memory seeding has been removed for Lab 3 (PostgreSQL + proper Category relationships).
 
 }

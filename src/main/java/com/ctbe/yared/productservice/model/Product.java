@@ -2,47 +2,64 @@ package com.ctbe.yared.productservice.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "products")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@SQLDelete(sql = "UPDATE products SET deleted = TRUE WHERE id = ?")
+@SQLRestriction("deleted = FALSE") // Hibernate 6.x
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 200)
+    @Column(nullable = false, length = 200)
     private String name;
 
-    @DecimalMin(value = "0.01", message = "Price must be greater than 0")
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @NotNull
+    @DecimalMin("0.00")
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @NotNull
+    @Min(0)
     @Column(nullable = false)
-    private double price;
+    private Integer stock;
 
-    @Min(value = 0, message = "Stock quantity cannot be negative")
-    private int stockQty;
+    @Column(unique = true)
+    private String slug;
 
-    @NotBlank(message = "Category is required")
-    private String category;
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean deleted = false;
 
-    public Product() {}
+    // OWNING SIDE of the relationship — holds the FK column
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    public Product(String name, double price, int stockQty, String category) {
-        this.name = name;
-        this.price = price;
-        this.stockQty = stockQty;
-        this.category = category;
-    }
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
-    // Getters and setters (all fields)
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
-    public int getStockQty() { return stockQty; }
-    public void setStockQty(int stockQty) { this.stockQty = stockQty; }
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 }

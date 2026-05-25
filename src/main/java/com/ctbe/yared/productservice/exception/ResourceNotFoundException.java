@@ -1,6 +1,7 @@
 package com.ctbe.yared.productservice.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
+
     private final Long id;
 
     public ResourceNotFoundException(Long id) {
@@ -8,5 +9,12 @@ public class ResourceNotFoundException extends RuntimeException {
         this.id = id;
     }
 
-    public Long getId() { return id; }
+    public ResourceNotFoundException(String message) {
+        super(message);
+        this.id = null;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
